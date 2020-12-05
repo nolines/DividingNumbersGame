@@ -19,4 +19,8 @@ public class GameInput {
             throw new Exception("Input parameter is invalid!");
         }
     }
+
+    public int getValue() {
+        return value;
+    }
 }

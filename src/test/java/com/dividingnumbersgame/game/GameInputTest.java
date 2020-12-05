@@ -11,8 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(SpringExtension.class)
 public class GameInputTest {
 
-    private GameInput gameInput;
-
     @Test
     public void shouldGameInputBiggerThanInitialLimit() throws Exception {
         GameInput expected = new GameInput(3);
