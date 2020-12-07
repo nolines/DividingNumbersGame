@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 public class GameExecutor {
 
-    private int ROOT_INDEX = 0;
+    private final int ROOT_INDEX = 0;
 
     private GameService gameService;
 

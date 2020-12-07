@@ -3,7 +3,7 @@ package com.dividingnumbersgame.game.Round;
 import java.util.Random;
 
 public class RoundResult {
-    private int result;
+    private final int result;
 
     public RoundResult(int result) {
         this.result = result;

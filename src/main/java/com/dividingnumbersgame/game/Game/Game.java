@@ -41,9 +41,10 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
 
         RoundInput roundInput = this.round.getRoundInput();
-        int calculatedResult;
-        calculatedResult = calculateResult(scanner, roundInput);
+
+        int calculatedResult = calculateResult(scanner, roundInput);
         RoundResult roundResult = new RoundResult(calculatedResult);
+
         playerService = this.playerService.next();
         int idx = playerService.getIdx();
         Player nextPlayer = playerService.getPlayers().get(idx);
