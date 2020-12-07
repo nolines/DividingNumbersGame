@@ -5,7 +5,7 @@ public interface DefaultGameService {
     /**
      * Game starts
      */
-    void startGame(Game game) throws Exception;
+    Game.Status startGame(Game game) throws Exception;
 
     /**
      * Game stops

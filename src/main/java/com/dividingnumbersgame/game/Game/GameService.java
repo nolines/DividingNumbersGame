@@ -6,10 +6,11 @@ import org.springframework.stereotype.Service;
 public class GameService implements DefaultGameService {
 
     @Override
-    public void startGame(Game game) throws Exception {
+    public Game.Status startGame(Game game) throws Exception {
         while (!game.getGameStatus().equals(Game.Status.FINISH)) {
             game.play();
         }
+        return game.getGameStatus();
     }
 
     @Override
