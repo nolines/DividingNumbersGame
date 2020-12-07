@@ -43,5 +43,9 @@ Game has status, so It could be traced by using this
 
 Used DDD approach and used a lot of immutable objects.
 
+### TODO
+
+Websocket implementation needs to replace the currect game logic. Game should play over the sockets 
+
 This was done in 10 hours.
 
