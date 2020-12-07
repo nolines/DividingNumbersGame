@@ -7,15 +7,26 @@ import com.dividingnumbersgame.game.Player.PlayerType;
 import com.dividingnumbersgame.game.Round.Round;
 import com.dividingnumbersgame.game.Round.RoundInput;
 import com.dividingnumbersgame.game.Round.RoundResult;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class GameExecutor {
+
+    @Autowired
+    private SimpMessageSendingOperations messagingTemplate;
 
     private int ROOT_INDEX = 0;
 
@@ -24,6 +35,20 @@ public class GameExecutor {
     private PlayerService playerService;
 
     public GameExecutor() {
+    }
+
+    @MessageMapping("/message")
+    @SendToUser("/queue/reply")
+    public String processMessageFromClient(@Payload String message, Principal principal) throws Exception {
+        String name = new Gson().fromJson(message, Map.class).get("name").toString();
+        messagingTemplate.convertAndSendToUser(principal.getName(), "/queue/reply", name);
+        return name;
+    }
+
+    @MessageExceptionHandler
+    @SendToUser("/queue/errors")
+    public String handleException(Throwable exception) {
+        return exception.getMessage();
     }
 
     public void play() throws Exception {
